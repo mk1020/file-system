@@ -1,12 +1,17 @@
 .rootContainer {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: orange solid 2px;
+}
+.leftContainer {
+    display: flex;
 }
 .icon {
-    align-self: flex-start;
+    margin-right: 10px;
 }
 .title {
-    align-self: flex-start;
 }
 .date {
-    align-self: flex-start;
 }

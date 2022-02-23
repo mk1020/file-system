@@ -1,12 +1,8 @@
 .rootContainer {
     display: flex;
-}
-.icon {
-    align-self: flex-start;
-}
-.title {
-    align-self: flex-start;
-}
-.date {
-    align-self: flex-start;
+    flex-direction: column;
+    width: 700px;
+    height: 700px;
+    border: black dashed 2px;
+    margin: 50px;
 }
