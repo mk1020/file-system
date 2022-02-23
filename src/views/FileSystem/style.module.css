@@ -1,0 +1,12 @@
+.rootContainer {
+    display: flex;
+}
+.icon {
+    align-self: flex-start;
+}
+.title {
+    align-self: flex-start;
+}
+.date {
+    align-self: flex-start;
+}
