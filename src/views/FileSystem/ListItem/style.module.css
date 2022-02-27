@@ -1,9 +1,15 @@
 .rootContainer {
     display: flex;
+    height: 45px;
+    align-items: center;
+    padding-left: 8px;
     flex-direction: row;
     justify-content: space-between;
-    padding: 8px;
     border-bottom: orange solid 2px;
+    cursor: move;
+}
+.rootContainer:active {
+    border: orange solid 3px;
 }
 .leftContainer {
     display: flex;

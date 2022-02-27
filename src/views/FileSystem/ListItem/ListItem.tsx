@@ -5,23 +5,20 @@ import styles from './style.module.css'
 type Props = {
     title: string
     date: string
-    onDragStart: (id: string) => void
-    handleDrop: (id: string) => void
-    id: string
+    onDragStart: (e: DragEvent<HTMLDivElement>) => void
+    onDrop: (e: DragEvent<HTMLDivElement>) => void
 }
 
 export const ListItem = (props: Props) => {
-    const {title, date, id, onDragStart, handleDrop} = props;
+    const {title, date, onDragStart, onDrop} = props;
 
 
     return (
         <div
             className={styles.rootContainer}
             draggable
-            onDragStart={() => onDragStart(id)}
-            onDrop={event => {
-                console.log(event.currentTarget)
-            }}
+            onDragStart={onDragStart}
+            onDrop={onDrop}
         >
             <div className={styles.leftContainer}>
                 <img

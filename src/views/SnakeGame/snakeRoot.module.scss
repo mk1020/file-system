@@ -1,0 +1,30 @@
+.boardContainer {
+  position: relative;
+  display: flex;
+  height: 90%;
+  border: orange dashed 3px;
+  margin: 20px;
+  margin-top: 10px;
+}
+.btnBegin{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(50%);
+  transform: translateY(50%);
+  height: 40px;
+  padding: 0 20px;
+  align-items: center;
+  background-color: orange;
+}
+
+.drop {
+  position: relative;
+  height: 20px;
+  width: 10px;
+  border: brown dashed 2px;
+  border-radius: 50%;
+  background-color: coral;
+  transform: translateX(-100%);
+  transform: translateY(-100%);
+}

@@ -1,22 +1,57 @@
-import React, {useMemo, useState} from "react";
+import React, {DragEvent, useMemo, useState} from "react";
 import styles from './style.module.css'
 import {ListItem} from "./ListItem/ListItem";
 
 type Props = {}
 
+interface Item {
+    id: string
+    title: string
+    date: string
+}
+
 export const FileSystem = (props: Props) => {
     const {} = props;
-    const [items, setItems] = useState(mock);
-    const [dragData, setDragData] = useState({});
+    const [items, setItems] = useState<Item[]>(mock);
+    const [dragData, setDragData] = useState<Item | undefined>(undefined);
 
-    const handleDragStart = (id: string) => {
-        setDragData({id: id});
+    const onDragStart = (draggedItem: Item) => {
+        setDragData(draggedItem);
+        console.log(draggedItem)
     };
+
     const handleDragOver = (e: any) => {
         e.preventDefault();
     };
 
-    const handleDrop = (id: string) => {
+    const onDrop = (e: DragEvent<HTMLDivElement>, indexItemDestination: number) => {
+        //99-120=21
+        console.log('Math.abs(e.currentTarget.getBoundingClientRect().top - e.clientY)', Math.abs(e.currentTarget.getBoundingClientRect().top - e.clientY))
+        console.log(' e.currentTarget.clientHeight / 2)',  e.currentTarget.clientHeight / 2)
+        if (Math.abs(e.currentTarget.getBoundingClientRect().top - e.clientY) < e.currentTarget.clientHeight / 2) {
+            if (dragData) {
+                const newItems: Item[] = [...items];
+
+                //insert dragged item
+                newItems.splice(indexItemDestination, 0, dragData);
+
+                //remove old dragged
+                const indexDraggedItem = newItems.findIndex((el, index) => el.id === dragData.id && index !== indexItemDestination);
+                newItems.splice(indexDraggedItem, 1)
+                setItems(newItems)
+            }
+        } else {
+            if (dragData) {
+                const newItems: Item[] = [...items];
+                //insert dragged item
+                newItems.splice(indexItemDestination + 1, 0, dragData);
+
+                //remove old dragged item
+                const indexDraggedItem = newItems.findIndex((el,i) => el.id === dragData.id && i !== indexItemDestination);
+                newItems.splice(indexDraggedItem, 1)
+                setItems(newItems)
+            }
+        }
     };
 
     const renderData = useMemo(() => (
@@ -24,22 +59,28 @@ export const FileSystem = (props: Props) => {
             <ListItem
                 title={el.title}
                 date={el.date}
-                key={'list-item-' + index}
-                onDragStart={handleDragStart}
-                id={el.id}
-                handleDrop={handleDrop}
+                key={el.id}
+                onDragStart={() => onDragStart(el)}
+                onDrop={(e: DragEvent<HTMLDivElement>) => onDrop(e, index)}
             />
         ))
-    ), [mock]);
-
+    ), [mock, items]);
 
 
     return (
         <div
             className={styles.rootContainer}
-             onDragOver={handleDragOver}
+            onDragOver={handleDragOver}
         >
-            {renderData}
+            {items.map((el, index) => (
+                <ListItem
+                    title={el.title}
+                    date={el.date}
+                    key={el.id}
+                    onDragStart={() => onDragStart(el)}
+                    onDrop={(e: DragEvent<HTMLDivElement>) => onDrop(e, index)}
+                />
+            ))}
         </div>
     )
 }
