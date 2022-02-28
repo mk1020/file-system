@@ -1,3 +1,6 @@
+.boardContainerWrapper {
+  height: 100%;
+}
 .boardContainer {
   position: relative;
   display: flex;
@@ -5,6 +8,7 @@
   border: orange dashed 3px;
   margin: 20px;
   margin-top: 10px;
+  box-sizing: content-box;
 }
 .btnBegin{
   position: absolute;
@@ -25,6 +29,14 @@
   border: brown dashed 2px;
   border-radius: 50%;
   background-color: coral;
-  transform: translateX(-100%);
-  transform: translateY(-100%);
+  //transform: translateX(-100%);
+  //transform: translateY(-100%);
+}
+
+.count {
+  text-align: center;
+  background-color: orange;
+  padding: 25px;
+  font-weight: bold;
+  font-size: 22px;
 }
